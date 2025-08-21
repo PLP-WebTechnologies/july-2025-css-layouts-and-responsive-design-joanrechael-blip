@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Responsive Layout with Grid & Flexbox</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>My Responsive Website</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="content">
+      <h2>Main Content Area</h2>
+      <div class="card-container">
+        <article class="card">
+          <h3>Card 1</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </article>
+        <article class="card">
+          <h3>Card 2</h3>
+          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+        </article>
+        <article class="card">
+          <h3>Card 3</h3>
+          <p>Donec ullamcorper nulla non metus auctor fringilla.</p>
+        </article>
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <h2>Sidebar</h2>
+      <p>Additional links or info can go here.</p>
+      <ul>
+        <li><a href="#">Sidebar Link 1</a></li>
+        <li><a href="#">Sidebar Link 2</a></li>
+        <li><a href="#">Sidebar Link 3</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 My Website. All rights reserved.</p>
+  </footer>
+</body>
+</html>
+
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+a {
+  color: #007acc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Layout Grid for the Entire Page */
+body {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "nav"
+    "main"
+    "footer";
+  min-height: 100vh;
+}
+
+/* Header */
+header {
+  grid-area: header;
+  background-color: #004080;
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+/* Navigation bar: Flexbox for horizontal alignment */
+nav {
+  grid-area: nav;
+  background-color: #007acc;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0.5rem 1rem;
+}
+
+nav ul li {
+  margin: 0 1rem;
+}
+
+nav ul li a {
+  font-weight: 600;
+  color: white;
+  padding: 0.5rem;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover,
+nav ul li a:focus {
+  background-color: #005999;
+  border-radius: 4px;
+}
+
+/* Main area uses CSS Grid to split content and sidebar */
+main {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #fff;
+}
+
+/* Content section */
+.content {
+  /* no extra layout - normal flow */
+}
+
+/* Card container uses Flexbox to arrange cards */
+.card-container {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+/* Cards styling */
+.card {
+  background-color: #e6f0ff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex: 1 1 200px; /* grow/shrink and minimum width */
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Sidebar styling */
+.sidebar {
+  background-color: #d9eaff;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.sidebar ul li + li {
+  margin-top: 0.5rem;
+}
+
+.sidebar a {
+  color: #004080;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  grid-area: footer;
+  background-color: #004080;
+  color: white;
+  text-align: center;
+  padding: 1rem 2rem;
+  font-size: 0.9rem;
+}
+
+/* --- Responsive Media Queries --- */
+
+/* Tablet: stack main columns, nav become vertical */
+@media (max-width: 900px) {
+  main {
+    grid-template-columns: 1fr;
+    padding: 1.5rem 1rem;
+  }
+
+  .card-container {
+    justify-content: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav ul li {
+    margin: 0.5rem 0;
+  }
+}
+
+/* Mobile: adjust font sizes, spacing and nav layout */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  nav ul li a {
+    padding: 0.75rem 0.5rem;
+    font-size: 1rem;
+  }
+
+  .card {
+    flex-basis: 100%;
+  }
+
+  .sidebar {
+    display: none; /* hide sidebar on small phones */
+  }
+
+  main {
+    padding: 1rem;
+  }
+}
