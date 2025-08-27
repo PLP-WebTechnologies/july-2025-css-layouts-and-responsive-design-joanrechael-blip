@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Responsive Layout with Grid & Flexbox</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>My Website</h1>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section class="content">
+        <h2>Main Content</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+          tincidunt, leo at condimentum ultricies, magna lacus sollicitudin
+          augue, in suscipit justo elit at ipsum.
+        </p>
+        <div class="cards">
+          <article class="card">
+            <h3>Card 1</h3>
+            <p>Some interesting card content goes here.</p>
+          </article>
+          <article class="card">
+            <h3>Card 2</h3>
+            <p>Some interesting card content goes here.</p>
+          </article>
+          <article class="card">
+            <h3>Card 3</h3>
+            <p>Some interesting card content goes here.</p>
+          </article>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <h2>Sidebar</h2>
+        <p>Useful links and info</p>
+        <ul>
+          <li><a href="#">Resource One</a></li>
+          <li><a href="#">Resource Two</a></li>
+          <li><a href="#">Resource Three</a></li>
+        </ul>
+      </aside>
+    </main>
+
+    <footer>
+      <p>© 2025 My Website. All Rights Reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>
+
+
+/* Base Styles and Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+a {
+  text-decoration: none;
+  color: #007acc;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Container uses CSS Grid for main layout */
+.container {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "nav nav"
+    "content sidebar"
+    "footer footer";
+  grid-template-columns: 3fr 1fr;
+  grid-gap: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+/* Grid Areas */
+header {
+  grid-area: header;
+  background-color: #007acc;
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+nav {
+  grid-area: nav;
+  background-color: #e0e7f3;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+/* Flexbox for nav menu items */
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  gap: 25px;
+}
+
+nav ul li a {
+  font-weight: bold;
+  padding: 8px 12px;
+  display: block;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+}
+
+nav ul li a:hover {
+  background-color: #005fa3;
+  color: white;
+}
+
+main {
+  grid-area: content / content / content / sidebar; /* spans content and sidebar */
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-gap: 20px;
+}
+
+/* Content and sidebar areas */
+.content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.sidebar {
+  background: #dbe9f7;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* Cards use Flexbox layout */
+.cards {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: #007acc;
+  color: white;
+  flex: 1 1 200px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+/* Footer */
+footer {
+  grid-area: footer;
+  background-color: #222;
+  color: #eee;
+  text-align: center;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+
+/* Tablet: width ≤ 768px */
+@media (max-width: 768px) {
+  .container {
+    grid-template-areas:
+      "header header"
+      "nav nav"
+      "content content"
+      "sidebar sidebar"
+      "footer footer";
+    grid-template-columns: 1fr;
+  }
+
+  main {
+    grid-template-columns: 1fr;
+  }
+
+  .cards {
+    flex-direction: column;
+  }
+
+  nav ul {
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+}
+
+/* Mobile: width ≤ 480px */
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  nav ul li a {
+    padding: 10px 0;
+  }
+
+  .card {
+    flex: 1 1 100%;
+  }
+
+  .sidebar {
+    display: none; /* Hide sidebar on small mobile */
+  }
+}
